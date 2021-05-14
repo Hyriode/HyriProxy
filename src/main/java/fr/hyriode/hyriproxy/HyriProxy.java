@@ -23,7 +23,7 @@ public class HyriProxy {
         this.startProxy();
     }
 
-    public void startProxy() {
+    private void startProxy() {
         this.logger.log("Starting HyriProxy...", LogType.INFO);
 
         // Set the ProxyManager with proxies server

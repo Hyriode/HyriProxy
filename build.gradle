@@ -1,31 +1,29 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 
-plugins {
-    id "com.github.johnrengelman.shadow" version "5.2.0"
-}
+import java.nio.charset.StandardCharsets
 
+apply plugin: 'idea'
 apply plugin: 'java-library'
 apply plugin: 'application'
 
 group = 'fr.hyriode'
-version = '0.0.1'
-mainClassName = 'fr.hyriode.hyriproxy.Main'
+version = '1.0.0'
+mainClassName = 'fr.hyriode.hyriproxy.HyriProxyBootstrap'
 
 compileJava{
-    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
-    options.encoding = 'UTF-8'
+    targetCompatibility = sourceCompatibility = JavaVersion.VERSION_1_8
+    options.encoding = StandardCharsets.UTF_8
 }
 
 repositories {
     mavenCentral()
 }
 
-task taskJar(type: Jar) {
+jar {
     manifest {
         attributes "Main-Class": "$mainClassName"
     }
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-    with jar
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
@@ -38,27 +36,8 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     from javadoc
 }
 
-shadowJar {
-    configurations = [project.configurations.shadow]
-}
-
 artifacts {
-    archives taskJar, sourcesJar, javadocJar, shadowJar
+    archives sourcesJar, javadocJar
 }
 
-dependencies {
-
-}
-
-processResources {
-    from(sourceSets.main.resources.srcDirs) {
-        filter ReplaceTokens, tokens: [version: version]
-    }
-}
-
-jar {
-    manifest {
-        attributes "Main-Class": "$mainClassName"
-    }
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-}
+dependencies {}

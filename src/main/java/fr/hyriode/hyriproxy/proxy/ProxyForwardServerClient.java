@@ -7,10 +7,11 @@ import java.net.Socket;
 
 public class ProxyForwardServerClient extends Thread {
 
-    private ProxyManager proxyManager;
-    private Socket clientSocket;
     private Socket serverSocket;
     private boolean forwardingActive = false;
+
+    private final ProxyManager proxyManager;
+    private final Socket clientSocket;
 
     public ProxyForwardServerClient(ProxyManager proxyManager, Socket clientSocket) {
         this.proxyManager = proxyManager;

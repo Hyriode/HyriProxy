@@ -28,23 +28,10 @@ public class Logger {
 
     public void log(String message, LogType type){
         final String date = String.format("[%s] ", new SimpleDateFormat("dd/MM/yyyy kk:mm:ss").format(new Date()));
-        String msg;
-        if (type.getColor() == null){
-            msg = date +
-                  this.loggerName +
-                  "[" + type.getName().toUpperCase() + "] " +
-                  message;
-            save(msg);
-        } else {
-            msg = type.getColor().getColor() +
-                    date +
-                    this.loggerName +
-                    "[" + type.getName().toUpperCase() + "] " +
-                    message +
-                    LogColor.RESET.getColor();
-            save(msg.substring(5, msg.length() - 4));
-        }
+        String msg = date + this.loggerName + "[" + type.getName().toUpperCase() + "] " + message;
+
         System.out.println(msg);
+        this.save(msg);
     }
 
     private void save(String message){

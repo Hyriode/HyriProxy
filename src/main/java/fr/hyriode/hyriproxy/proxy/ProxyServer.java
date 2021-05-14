@@ -2,9 +2,9 @@ package fr.hyriode.hyriproxy.proxy;
 
 public class ProxyServer {
 
-    private String name;
-    private String hostname;
-    private int port;
+    private final String name;
+    private final String hostname;
+    private final int port;
 
     public ProxyServer(String name, String hostname, int port) {
         this.name = name;

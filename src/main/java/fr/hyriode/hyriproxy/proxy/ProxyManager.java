@@ -8,9 +8,11 @@ import java.util.List;
 
 public class ProxyManager {
 
-    private List<ProxyServer> proxyServers;
     private ProxyServer currentProxyServer;
-    private int port;
+
+    private final List<ProxyServer> proxyServers;
+
+    private final int port;
 
     public ProxyManager(int port) {
         this.proxyServers = new ArrayList<>();
